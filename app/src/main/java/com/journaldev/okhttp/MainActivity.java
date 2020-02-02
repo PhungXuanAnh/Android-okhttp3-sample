@@ -24,6 +24,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private String LOGTAG = "okhttp3Sample";
 
     TextView txtString;
     Button asynchronousGet, synchronousGet, asynchronousPOST;
@@ -68,13 +69,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                Log.e(LOGTAG, "Cannot do ASYNC POST, see Exception on Run tab");
                 call.cancel();
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
-                Log.d("TAG", response.body().string());
+                Log.d(LOGTAG, "Response of ASYNC POST: " + response.body().string());
             }
         });
     }
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(Call call, Response response) throws IOException {
 
                 final String myResponse = response.body().string();
+                Log.d(LOGTAG, "Response of ASYNC get: " + myResponse);
 
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
@@ -108,6 +110,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             txtString.setText("First Name: "+json.getJSONObject("data").getString("first_name") + "\nLast Name: " + json.getJSONObject("data").getString("last_name"));
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Log.e(LOGTAG, "Cannot convert response to json, see Exception on Run tab");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.e(LOGTAG, "Some Exception happend when get ASYNC, see Exception on Run tab");
                         }
                     }
                 });
@@ -157,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return response.body().string();
             } catch (Exception e) {
                 e.printStackTrace();
+                Log.e(LOGTAG, "Something wrong happen when SYNC get, see Exception on Run tab");
             }
             return null;
         }
@@ -165,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             txtString.setText(s);
+            Log.d(LOGTAG, "Response of SYNC get: " + s);
         }
     }
 
