@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Android-okhttp3-sample.iml" filepath="$PROJECT_DIR$/Android-okhttp3-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Android-okhttp3-sample-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Android-okhttp3-sample-app.iml" group="Android-okhttp3-sample/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidStudioProjects-Android-okhttp3-sample.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidStudioProjects-Android-okhttp3-sample.iml" group="Android-okhttp3-sample" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -75,7 +75,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.d(LOGTAG, "Response of ASYNC POST: " + response.body().string());
+                final String respData = response.body().string();
+                Log.d(LOGTAG, "Response of ASYNC POST: " + respData);
+
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            txtString.setText(respData);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.e(LOGTAG, "Some Exception happend when show post ASYNC result, see Exception on Run tab");
+                        }
+                    }
+                });
             }
         });
     }
